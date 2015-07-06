@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang = "ru">
+<head>
+    <meta charset='utf-8'>
+    <title>Главная страница</title>
+
+    <link href = "css/bootstrap.min.css" rel = "stylesheet">
+    <link href = "css/main.css" rel = "stylesheet">
+</head>
+<body>
+    {% block top_navbar %} {% endblock %}
+    <div class = "container">
+        <div class = "row">
+            <div class = "col-lg-7">
+                {% block index_greetings %} {% endblock %}
+            </div>
+            <div class = "col-lg-5">
+                <div class = "input-group">
+                    <div class = "input-group-btn">
+                        <button type = "button" class = "btn btn-default dropdown-toggle" data-toggle = "dropdown">
+                            Поиск работы <span class = "caret"></span>
+                        </button>
+                        <ul class = "dropdown-menu">
+                            <li><a href = "#">Поиск работы</a></li>
+                            <li><a href = "#">Поиск студента</a></li>
+                        </ul>
+                    </div>
+                    <input type = "text" class = "form-control">
+                    <span class = "input-group-btn">
+                        <button type = "button" class = "btn btn-default">Найти</button>
+                    </span>
+                </div>
+                {% block random_company %} {% endblock %}
+            </div>
+        </div>
+    </div>
+    <div class = "container">
+        <div class = "row" >
+            <div class = "col-lg-4">
+                {% block job_categories %} {% endblock %}
+            </div>
+            <div class = "col-lg-8 search_block">
+                {% block index_table %} {% endblock %}
+            </div>
+        </div>
+    </div>
+    <script src = "http://code.jquery.com/jquery-latest.js"></script>
+    <script src = "js/bootstrap.min.js"></script>
+</body>
+</html>

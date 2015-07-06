@@ -1,0 +1,153 @@
+{% extends "../site_pages/index.html" %}
+
+{% block top_navbar %}
+    <nav class = "navbar navbar-default" role = "navigation" id = "top_line">
+        <div class = "container-fluid">
+            <div class = "navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <img src = "img/mipt_logo.png" class = "navbar_photo">
+                <!--<a class="navbar-brand" href="#">Физтех-Работа</a>!-->
+            </div>
+            <div class = "collapse navbar-collapse" id = "top_navbar">
+                <ul class = "nav navbar-nav navbar-right">
+                    <li><a href = "#">Найти работу</a></li>
+                    <li><a href = "#">Найти студента</a></li>
+                    <li><a href = "#">Как это работает?</a></li>
+                    {% if user_is_login %}
+                        <li><img src = "{{ foto_path }}" class = "navbar_photo img-circle"></li>
+                        <li><p class="navbar-text">{{ username }}</p></li>
+                        <li><a href = "#"><span class="glyphicon glyphicon-share"></span></a></li>
+                    {% else %}
+                        <li><a href = "#"><span class="glyphicon glyphicon-user"> Войти</span></a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block index_greetings %}
+    <ul class = "nav nav-tabs">
+    {% if active_greeting_tab == 1 %}
+            <li class = "active"><a href="#">Студентам</a></li>
+            <li><a href="#">Работодателям</a></li>
+            <li><a href="#">О нас</a></li>
+        </ul>
+        <h3>Уважаемые студенты!</h3>
+        <p>Добро пожаловать на сайт Физтех-Работа. Здесь вы можете найти работу на интересующей вас базовой кафедре или в физтеховской организации. Ответы на большинство вопросов вы можете найти в разделе <a>"Как это работает?"</a>.</p>
+    {% elif active_greeting_tab == 2 %}
+            <li><a href="#">Студентам</a></li>
+            <li class = "active"><a href="#">Работодателям</a></li>
+            <li><a href="#">О нас</a></li>
+        </ul>
+        <h3>Уважаемые работодатели!</h3>
+        <p>Добро пожаловать на сайт Физтех-Работа. Здесь вы можете найти студента для работы, разместить вакансию и многое другое. Ответы на большинство вопросов вы можете найти в разделе <a>"Как это работает?"</a>.</p>
+    {% else %}
+        <li><a href="#">Студентам</a></li>
+            <li><a href="#">Работодателям</a></li>
+            <li class = "active"><a href="#">О нас</a></li>
+        </ul>
+        <h3>Кто мы?</h3>
+        <p>Мы - группа студентов первого курса МФТИ, движимые целью сделать жизнь лучше. Все ошибки и пожелания о работе сайта вы можете писать мне на почту:</p>
+    {% endif %}
+{% endblock %}
+
+{% block random_company %}
+    <div class = "media thumbnail random_company">
+        <h3>Возможно, вас заинтересует:</h3>
+        <a class = "pull-left">
+            <img class = "img-thumbnail media-object company_logo" src = "{{ random_company_logo_path }}">
+        </a>
+        <div class = "media-body">
+            <h4 class = "media-heading">Компания {{ ranndom_company_name }}</h4>
+            <p>{{ random_company_about }}</p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block job_categories %}
+    <h3>Категории:</h3>
+        <ul class="nav nav-pills nav-stacked job_categories">
+            {% for categories in categories_list %}
+                <li>
+                    <a><h4>{{ categories.name }}</h4></a>
+                </li>
+            {% endfor %}
+        </ul>
+{% endblock %}
+
+{% block index_table %}
+    <h3>Вакансии:</h3>
+    <ul class = "nav nav-tabs">
+        {% if index_table_active_button == 1 %}
+            <li class = "active"><a href="#">Новые вакансии</a></li>
+            <li><a href="#">Студенты</a></li>
+            <li><a href="#">Компании</a></li>
+        {% elif index_table_active_button == 2 %}
+            <li><a href="#">Новые вакансии</a></li>
+            <li class = "active"><a href="#">Студенты</a></li>
+            <li><a href="#">Компании</a></li>
+        {% else %}
+            <li><a href="#">Новые вакансии</a></li>
+            <li><a href="#">Студенты</a></li>
+            <li class = "active"><a href="#">Компании</a></li>
+        {% endif %}
+    </ul>
+    <table class = "table table-condensed table-striped">
+        {% if index_table_active_button == 1 %}
+            <thead>
+            <tr>
+                <th>Компания</th>
+                <th>Вакансия</th>
+                <th>Умения</th>
+                <th>З/п</th>
+                <th>Срок</th>
+            </tr>
+            </thead>
+            {% for jobs in jobs_list %}
+                <tr>
+                    <th>{{ jobs.company  }}</th>
+                    <th>{{ jobs.name }}</th>
+                    <th>{{ jobs.skill }}</th>
+                    <th>{{ jobs.money }}</th>
+                    <th>{{ jobs.time }}</th>
+                </tr>
+            {% endfor %}
+            </table>
+        {% elif index_table_active_button == 2 %}
+            <thead>
+            <tr>
+                <th>ФИО</th>
+                <th>Факультет</th>
+                <th>Курс</th>
+                <th>Средний балл</th>
+            </tr>
+            </thead>
+            {% for students in students_list %}
+                <tr>
+                    <th>{{ students.name }}</th>
+                    <th>{{ students.faculty }}</th>
+                    <th>{{ students.degree }}</th>
+                    <th>{{ students.rating }}</th>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <thead>
+            <tr>
+                <th>Название</th>
+                <th>Описание</th>
+            </tr>
+            </thead>
+            {% for company in company_list %}
+                <tr>
+                    <th>{{ company.name }}</th>
+                    <th>{{ company.about }}</th>
+                </tr>
+            {% endfor %}
+        {% endif %}
+{% endblock %}
