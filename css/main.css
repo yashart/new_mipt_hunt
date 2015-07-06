@@ -1,0 +1,56 @@
+.navbar-default {
+    background-color: rgb(53, 175, 210);
+    border-color: rgba(77, 161, 210, 0.99);
+}
+.navbar-default .navbar-brand{
+    color: rgba(255, 255, 255, 0.99)
+}
+.navbar-default .navbar-nav > li > a{
+    color: rgba(255, 255, 255, 0.99);
+}
+.navbar-default .navbar-nav > li > p{
+    color: rgba(255, 255, 255, 0.99);
+}
+.navbar_photo {
+    height: 50px;
+}
+.navbar_big_button {
+    background-color: rgb(255, 255, 255);
+    border-color: rgb(255, 255, 255);
+}
+.navbar_big_button .navbar-nav > li > a{
+    color: #000000;
+}
+.job_categories > div{
+    background-color: #ffdfef;
+}
+.search_block {
+
+}
+.search_block > table {
+    background-color: #ffffff;
+}
+.search_block > table > thead {
+    background-color: rgb(53, 175, 210);
+}
+.search_block > .nav-tabs > li.active > a,
+.search_block > .nav-tabs > li.active > a:hover,
+.search_block > .nav-tabs > li.active > a:focus{
+    color: #000000;
+    background-color: rgb(53, 175, 210);
+}
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus,
+body {
+    background-color: #cef5ff;
+}
+.random_company {
+    background-color: #c1ffa5;
+}
+h3 {
+    text-align: center;
+}
+.job_categories > * {
+    background-color: #eed5ac;
+}
