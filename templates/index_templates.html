@@ -111,11 +111,11 @@
             </thead>
             {% for jobs in jobs_list %}
                 <tr>
-                    <th>{{ jobs.company  }}</th>
-                    <th>{{ jobs.name }}</th>
-                    <th>{{ jobs.skill }}</th>
-                    <th>{{ jobs.money }}</th>
-                    <th>{{ jobs.time }}</th>
+                    <td>{{ jobs.company  }}</td>
+                    <td>{{ jobs.name }}</td>
+                    <td>{{ jobs.skill }}</td>
+                    <td>{{ jobs.money }}</td>
+                    <td>{{ jobs.time }}</td>
                 </tr>
             {% endfor %}
             </table>
@@ -130,10 +130,10 @@
             </thead>
             {% for students in students_list %}
                 <tr>
-                    <th>{{ students.name }}</th>
-                    <th>{{ students.faculty }}</th>
-                    <th>{{ students.degree }}</th>
-                    <th>{{ students.rating }}</th>
+                    <td>{{ students.name }}</td>
+                    <td>{{ students.faculty }}</td>
+                    <td>{{ students.degree }}</td>
+                    <td>{{ students.rating }}</td>
                 </tr>
             {% endfor %}
         {% else %}
@@ -145,8 +145,8 @@
             </thead>
             {% for company in company_list %}
                 <tr>
-                    <th>{{ company.name }}</th>
-                    <th>{{ company.about }}</th>
+                    <td>{{ company.name }}</td>
+                    <td>{{ company.about }}</td>
                 </tr>
             {% endfor %}
         {% endif %}
