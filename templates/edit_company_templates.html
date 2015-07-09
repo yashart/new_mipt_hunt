@@ -1,0 +1,55 @@
+{% extends "../site_pages/edit_company.html" %}
+
+{% block top_navbar %}
+    <nav class = "navbar navbar-default" role = "navigation" id = "top_line">
+        <div class = "container-fluid">
+            <div class = "navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <img src = "img/mipt_logo.png" class = "navbar_photo">
+                <!--<a class="navbar-brand" href="#">Физтех-Работа</a>!-->
+            </div>
+            <div class = "collapse navbar-collapse" id = "top_navbar">
+                <ul class = "nav navbar-nav navbar-right">
+                    <li><a href = "#">Найти работу</a></li>
+                    <li><a href = "#">Найти студента</a></li>
+                    <li><a href = "#">Как это работает?</a></li>
+                    {% if user_is_login %}
+                        <li><img src = "{{ foto_path }}" class = "navbar_photo img-circle"></li>
+                        <li><p class="navbar-text">{{ username }}</p></li>
+                        <li><a href = "#"><span class="glyphicon glyphicon-share"></span></a></li>
+                    {% else %}
+                        <li><a href = "#"><span class="glyphicon glyphicon-user"> Войти</span></a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block company_info %}
+    <h3>Информация о компании:</h3>
+        <textarea rows = "5" cols = "120">{{ company_info }}</textarea>
+        <h3>Контакты:</h3>
+        <textarea rows = "5" cols = "120">{{ company_contacts }}</textarea>
+        <button type = "button" class = "btn btn-default">Сохранить изменения</button>
+{% endblock %}
+
+{% block add_job %}
+    <h3>Добавить вакансию</h3>
+    <input placeholder = "Название вакансии">
+    <input placeholder = "Умения">
+    <input placeholder = "Зарплата">
+    <input placeholder = "Срок">
+    <br>
+    <h4>Теги:</h4>
+    {% for tags in tags_list %}
+        <input type = "checkbox">{{ tags.name }}
+    {% endfor %}
+    <br>
+    <button type = "button" class = "btn btn-default">Добавить вакансию</button>
+{% endblock %}

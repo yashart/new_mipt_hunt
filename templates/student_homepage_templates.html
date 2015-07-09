@@ -1,0 +1,107 @@
+{% extends "../site_pages/student_homepage.html" %}
+
+{% block top_navbar %}
+    <nav class = "navbar navbar-default" role = "navigation" id = "top_line">
+        <div class = "container-fluid">
+            <div class = "navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <img src = "img/mipt_logo.png" class = "navbar_photo">
+                <!--<a class="navbar-brand" href="#">Физтех-Работа</a>!-->
+            </div>
+            <div class = "collapse navbar-collapse" id = "top_navbar">
+                <ul class = "nav navbar-nav navbar-right">
+                    <li><a href = "#">Найти работу</a></li>
+                    <li><a href = "#">Найти студента</a></li>
+                    <li><a href = "#">Как это работает?</a></li>
+                    {% if user_is_login %}
+                        <li><img src = "{{ foto_path }}" class = "navbar_photo img-circle"></li>
+                        <li><p class="navbar-text">{{ username }}</p></li>
+                        <li><a href = "#"><span class="glyphicon glyphicon-share"></span></a></li>
+                    {% else %}
+                        <li><a href = "#"><span class="glyphicon glyphicon-user"> Войти</span></a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block user_info %}
+    <h3>Информация о пользователе:</h3>
+    <div class = "col-lg-2">
+        <img src = "{{ foto_path }}" class = "img-responsive">
+    </div>
+    <div class = "col-lg-5">
+        <table class = "table table-condensed table-striped table-bordered">
+            <tr>
+                <td>ФИО</td>
+                <td>{{ username }}</td>
+            </tr>
+            <tr>
+                <td>Факультет</td>
+                <td>{{ user_faculty }}</td>
+            </tr>
+            <tr>
+                <td>Курс</td>
+                <td>{{ user_degree }}</td>
+            </tr>
+            <tr>
+                <td>Средний балл</td>
+                <td>{{ user_rating }}</td>
+            </tr>
+        </table>
+    </div>
+    <div class = "col-lg-5">
+        {% if has_user_info %}
+            <p>{{ user_info }}</p>
+        {% else %}
+            <textarea>{{ user_info }}</textarea>
+        {% endif %}
+            <button type = "button" class = "btn btn-default">Редактировать</button>
+    </div>
+{% endblock %}
+
+{% block old_jobs %}
+<h3>Предыдущие места работы:</h3>
+    <table class = "table table-striped table-condensed">
+        <thead>
+        <tr>
+            <th>Компания/Организация</th>
+            <th>Вакансия</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for old_jobs in old_jobs_list %}
+            <tr>
+                <td>{{ old_jobs.company }}</td>
+                <td>{{ old_jobs.job }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block now_jobs %}
+    <h3>Текущие места работы:</h3>
+    <table class = "table table-striped table-condensed">
+        <thead>
+        <tr>
+            <th>Компания/Организация</th>
+            <th>Вакансия</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for now_jobs in now_jobs_list %}
+            <tr>
+                <td>{{ now_jobs.company }}</td>
+                <td>{{ now_jobs.job }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

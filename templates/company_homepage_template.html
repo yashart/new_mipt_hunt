@@ -1,0 +1,100 @@
+{% extends "../site_pages/company_homepage.html" %}
+
+{% block top_navbar %}
+    <nav class = "navbar navbar-default" role = "navigation" id = "top_line">
+        <div class = "container-fluid">
+            <div class = "navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <img src = "img/mipt_logo.png" class = "navbar_photo">
+                <!--<a class="navbar-brand" href="#">Физтех-Работа</a>!-->
+            </div>
+            <div class = "collapse navbar-collapse" id = "top_navbar">
+                <ul class = "nav navbar-nav navbar-right">
+                    <li><a href = "#">Найти работу</a></li>
+                    <li><a href = "#">Найти студента</a></li>
+                    <li><a href = "#">Как это работает?</a></li>
+                    {% if user_is_login %}
+                        <li><img src = "{{ foto_path }}" class = "navbar_photo img-circle"></li>
+                        <li><p class="navbar-text">{{ username }}</p></li>
+                        <li><a href = "#"><span class="glyphicon glyphicon-share"></span></a></li>
+                    {% else %}
+                        <li><a href = "#"><span class="glyphicon glyphicon-user"> Войти</span></a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block company_info %}
+    <h3>Информация о компании:</h3>
+    <div class = "col-lg-2">
+        <img class = "img-responsive" src = "{{ logo_path }}">
+    </div>
+    <div class = "col-lg-7">
+        <p>{{ company_info }}</p>
+    </div>
+    <div class = "col-lg-3">
+        <h4>Контакты:</h4>
+        <p>{{ company_contacts }}</p>
+    </div>
+{% endblock %}
+
+{% block open_jobs %}
+    <h3>Открытые вакансии:</h3>
+    <table class = "table table-condensed table-striped">
+        <thead>
+        <tr>
+            <th>Вакансия</th>
+            <th>Умения</th>
+            <th>З/п</th>
+            <th>Срок</th>
+            <th>Курс</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for open_jobs in open_jobs_list %}
+            <tr>
+                <td>{{ open_jobs.name }}</td>
+                <td>{{ open_jobs.skill }}</td>
+                <td>{{ open_jobs.money }}</td>
+                <td>{{ open_jobs.time }}</td>
+                <td>{{ open_jobs.degree }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <button type = "button" class = "btn btn-default">Редактировать</button>
+{% endblock %}
+
+{% block get_jobs %}
+    {% if company_login %}
+        <h3>Поступившие вакансии</h3>
+        <table class = "table table-condensed table-striped">
+            <thead>
+                <tr>
+                    <th>Вакансия</th>
+                    <th>Студент</th>
+                    <th>Решение</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for workers in workers_list %}
+                <tr>
+                    <td>{{ workers.job }}</td>
+                    <td>{{ workers.name }}</td>
+                    <td>
+                        <button class = "alert-success">Принять <span class = "glyphicon glyphicon-ok"></span></button>
+                        <button class = "alert-danger">Отклонить <span class = "glyphicon glyphicon-remove"></span> </button>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}
