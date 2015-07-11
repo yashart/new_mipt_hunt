@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang = "ru">
+<head>
+    <meta charset='utf-8'>
+    <title>Поиск по сайту</title>
+
+    <link href = "css/bootstrap.min.css" rel = "stylesheet">
+    <link href = "css/main.css" rel = "stylesheet">
+</head>
+<body>
+    {% block top_navbar %} {% endblock %}
+    <div class = "container">
+        <h3>Поиск по сайту</h3>
+        <div class = "input-group">
+            <input type = "text" class = "form-control">
+            <span class = "input-group-btn">
+                <button type = "button" class = "btn btn-default">Найти</button>
+            </span>
+        </div>
+        {% block search_params %} {% endblock %}
+    </div>
+    <div class = "container">
+        {% block search_table %} {% endblock %}
+    </div>
+</body>
+</html>

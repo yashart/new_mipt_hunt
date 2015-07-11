@@ -1,0 +1,165 @@
+{% extends "../site_pages/search.html" %}
+
+{% block top_navbar %}
+    <nav class = "navbar navbar-default" role = "navigation" id = "top_line">
+        <div class = "container-fluid">
+            <div class = "navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <img src = "img/mipt_logo.png" class = "navbar_photo">
+                <!--<a class="navbar-brand" href="#">Физтех-Работа</a>!-->
+            </div>
+            <div class = "collapse navbar-collapse" id = "top_navbar">
+                <ul class = "nav navbar-nav navbar-right">
+                    <li><a href = "#">Найти работу</a></li>
+                    <li><a href = "#">Найти студента</a></li>
+                    <li><a href = "#">Как это работает?</a></li>
+                    {% if user_is_login %}
+                        <li><img src = "{{ foto_path }}" class = "navbar_photo img-circle"></li>
+                        <li><p class="navbar-text">{{ username }}</p></li>
+                        <li><a href = "#"><span class="glyphicon glyphicon-share"></span></a></li>
+                    {% else %}
+                        <li><a href = "#"><span class="glyphicon glyphicon-user"> Войти</span></a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block search_params %}
+    <h3>Расширенный поиск</h3>
+    <div class = "search_params">
+        <div class = "col-lg-6">
+            {% if jobs_button_active == 1 %}
+                <input placeholder = "Название вакансии">
+                <br>
+                <input placeholder = "Название компании">
+                <br>
+                <p>Заработная плата <input placeholder = "От" size = "5">-<input placeholder = "До" size = "5"></p>
+                <select>
+                    <option selected = "selected">Срок работы</option>
+                    <option>Несколько часов</option>
+                    <option>1 день</option>
+                    <option>Менее недели</option>
+                    <option>Менее месяца</option>
+                    <option>Несколько месяцев</option>
+                    <option>Больше года</option>
+                </select>
+            {% elif jobs_button_active == 2 %}
+                <input placeholder = "Фамилия">
+                <select>
+                    <option selected = "selected">Факультет</option>
+                    <option>ФРТК</option>
+                    <option>ФОПФ</option>
+                    <option>ФАКИ</option>
+                    <option>ФУПМ</option>
+                    <option>ФИВТ</option>
+                    <option>ФАЛТ</option>
+                    <option>ФФКЭ</option>
+                    <option>ФПФЭ</option>
+                </select>
+                <select>
+                    <option selected = "selected">Курс</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>Аспирантура</option>
+                </select>
+                <input placeholder = "Средний балл">
+            {% endif %}
+        </div>
+        <div class = "col-lg-6">
+            <h4>Теги:</h4>
+            {% for tags in tags_list %}
+                <input type = "checkbox">{{ tags.name }}
+            {% endfor %}
+        </div>
+    </div>
+    <button type = "button" class = "btn btn-default">Применить признаки</button>
+{% endblock %}
+
+{% block search_table %}
+    <ul class = "nav nav-tabs">
+        {% if index_table_active_button == 1 %}
+            <li class = "active"><a href="#">Новые вакансии</a></li>
+            <li><a href="#">Студенты</a></li>
+            <li><a href="#">Компании</a></li>
+        {% elif index_table_active_button == 2 %}
+            <li><a href="#">Новые вакансии</a></li>
+            <li class = "active"><a href="#">Студенты</a></li>
+            <li><a href="#">Компании</a></li>
+        {% else %}
+            <li><a href="#">Новые вакансии</a></li>
+            <li><a href="#">Студенты</a></li>
+            <li class = "active"><a href="#">Компании</a></li>
+        {% endif %}
+    </ul>
+    <table class = "table table-condensed table-striped">
+        {% if index_table_active_button == 1 %}
+            <thead>
+            <tr>
+                <th>Компания</th>
+                <th>Вакансия</th>
+                <th>Умения</th>
+                <th>З/п</th>
+                <th>Срок</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for jobs in jobs_list %}
+                <tr>
+                    <th>{{ jobs.company  }}</th>
+                    <th>{{ jobs.name }}</th>
+                    <th>{{ jobs.skill }}</th>
+                    <th>{{ jobs.money }}</th>
+                    <th>{{ jobs.time }}</th>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% elif index_table_active_button == 2 %}
+            <thead>
+            <tr>
+                <th>ФИО</th>
+                <th>Факультет</th>
+                <th>Курс</th>
+                <th>Средний балл</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for students in students_list %}
+                <tr>
+                    <th>{{ students.name }}</th>
+                    <th>{{ students.faculty }}</th>
+                    <th>{{ students.degree }}</th>
+                    <th>{{ students.rating }}</th>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <thead>
+            <tr>
+                <th>Название</th>
+                <th>Описание</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for company in company_list %}
+                <tr>
+                    <th>{{ company.name }}</th>
+                    <th>{{ company.about }}</th>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+{% endblock %}
